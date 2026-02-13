@@ -83,12 +83,10 @@
     .card-badge.visa{color:#1a1f71}
     .card-badge.mc{color:#eb001b}
     .card-badge.amex{color:#006fcf}
-    .detected-card{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem;text-align:center;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .detected-card{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem;text-align:center;min-height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center}
     .detected-card-label{font-size:.75rem;color:var(--text-muted);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.05em}
+    .detected-card-logo{height:36px;object-fit:contain;max-width:120px}
     .detected-card-value{font-size:1.25rem;font-weight:700}
-    .detected-card-value.visa{color:#1a1f71}
-    .detected-card-value.mc{color:#eb001b}
-    .detected-card-value.amex{color:#006fcf}
     .footer{background:var(--primary);color:white;padding:2rem 1.5rem;margin-top:auto}
     .footer-inner{max-width:1200px;margin:0 auto;text-align:center}
     .footer-nav{display:flex;justify-content:center;gap:2rem;margin-bottom:1.5rem;flex-wrap:wrap}
@@ -172,13 +170,16 @@
           <aside class="trust-panel">
             <div class="detected-card" id="detectedCard">
               <span class="detected-card-label">Your card</span>
-              <span class="detected-card-value" id="detectedCardValue">—</span>
+              <div id="detectedCardValue" style="min-height:40px;display:flex;align-items:center;justify-content:center">
+                <img src="/visa.svg" alt="Visa" class="detected-card-logo" id="detectedLogo" style="display:none">
+                <span class="detected-card-value" id="detectedPlaceholder">—</span>
+              </div>
             </div>
             <h3>Accepted Cards</h3>
             <div class="card-badges">
-              <span class="card-badge visa">Visa</span>
-              <span class="card-badge mc">Mastercard</span>
-              <span class="card-badge amex">American Express</span>
+              <img src="/visa.svg" alt="Visa" style="height:24px;object-fit:contain">
+              <img src="/mastercard.svg" alt="Mastercard" style="height:24px;object-fit:contain">
+              <img src="/amex.svg" alt="American Express" style="height:20px;object-fit:contain">
             </div>
             <h3 style="margin-top:1.5rem">Why GC Check</h3>
             <div class="trust-item"><span class="icon">✓</span><div><h4>Secure & Encrypted</h4><p>Bank-level encryption protects your information.</p></div></div>
@@ -282,10 +283,17 @@
     }
     function updateDetectedCard(){
       const digits=cardInput.value.replace(/\s/g,'');
-      const el=document.getElementById('detectedCardValue');
+      const logoEl=document.getElementById('detectedLogo');
+      const placeholderEl=document.getElementById('detectedPlaceholder');
       const type=getCardType(digits);
-      if(digits.length>=4&&type){el.textContent=type;el.className='detected-card-value '+(type==='Visa'?'visa':type==='Mastercard'?'mc':'amex')}
-      else{el.textContent='—';el.className='detected-card-value'}
+      if(digits.length>=4&&type){
+        const src=type==='Visa'?'/visa.svg':type==='Mastercard'?'/mastercard.svg':'/amex.svg';
+        logoEl.src=src;logoEl.alt=type;logoEl.style.display='block';
+        placeholderEl.style.display='none';
+      }else{
+        logoEl.style.display='none';
+        placeholderEl.style.display='block';placeholderEl.textContent='—';
+      }
     }
     cardInput.oninput=e=>{let v=e.target.value.replace(/\D/g,'').slice(0,19);e.target.value=v.replace(/(\d{4})(?=\d)/g,'$1 ');e.target.classList.remove('error');updateDetectedCard()};
     expiryMonth.oninput=e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,2);e.target.classList.remove('error')};
