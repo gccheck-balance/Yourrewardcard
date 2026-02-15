@@ -72,6 +72,7 @@
     .top-bar-right a{color:var(--white);text-decoration:none}
     .top-bar-right a:hover{text-decoration:underline}
     .top-bar-sep{color:rgba(255,255,255,.5);user-select:none}
+    .top-bar-lang{display:inline-flex;align-items:center;gap:4px}
     /* Main nav – light grey */
     .main-nav{background:var(--nav-bg);padding:1rem 1.5rem;border-bottom:1px solid var(--border)}
     .main-nav-inner{max-width:970px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
@@ -80,8 +81,8 @@
     .main-nav-links{display:flex;gap:1.5rem}
     .main-nav-links a{color:var(--text);text-decoration:none;font-size:.9375rem}
     .main-nav-links a:hover{text-decoration:underline}
-    /* Main content – scroll sections (reference: hero background) */
-    .main{flex:1;padding:0;width:100%;background-image:url('https://images.ctfassets.net/clvazscvae0g/1TLlw2zuZSWKCoiqia84wC/fb8da87d884ae0dfa898737682f4034e/RC_HERO_EN_011217.jpg');background-size:cover;background-position:center;background-repeat:no-repeat}
+    /* Main content – scroll sections (reference: hero background), no blur */
+    .main{flex:1;padding:0;width:100%;background-image:url('https://images.ctfassets.net/clvazscvae0g/1TLlw2zuZSWKCoiqia84wC/fb8da87d884ae0dfa898737682f4034e/RC_HERO_EN_011217.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;filter:none}
     .main-inner{max-width:970px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;min-height:420px}
     @media(max-width:900px){.main-inner{grid-template-columns:1fr}}
     /* Section 2 – How to activate bar */
@@ -118,7 +119,7 @@
     .feature-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.06)}
     .feature-card .feature-icon{width:64px;height:64px;background:#e8e8e8;border-radius:8px;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#666}
     .feature-card .feature-icon svg{width:40px;height:40px;fill:#555}
-    .flag-us{display:inline-block;width:20px;height:14px;vertical-align:middle;margin-right:6px;border:1px solid rgba(0,0,0,.2)}
+    .flag-us{display:inline-block;width:22px;height:14px;vertical-align:middle;margin-right:6px;border:1px solid rgba(0,0,0,.25);border-radius:1px;object-fit:cover}
     .feature-card h3{font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:.75rem}
     .feature-card p{font-size:.875rem;color:var(--text-muted);line-height:1.6;margin-bottom:1rem}
     .feature-card a{font-size:.875rem;color:var(--text);text-decoration:underline}
@@ -176,10 +177,10 @@
     #checkAnother{display:none;width:100%;padding:.65rem;font-size:.875rem;background:var(--white);color:var(--text);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;margin-top:.75rem}
     #checkAnother.show{display:block}
     #formFields.hide{display:none}
-    /* Right – Enjoy panel (reference: hero image visible) */
-    .promo-panel{background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;position:relative}
+    /* Right – one "Enjoy!" only, no blur */
+    .promo-panel{background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;position:relative;filter:none}
     .promo-text{font-size:3.5rem;font-weight:300;color:rgba(255,255,255,.95);text-shadow:0 1px 3px rgba(0,0,0,.4);letter-spacing:-0.02em;line-height:1;margin-bottom:1.5rem}
-    .promo-image{width:100%;max-width:380px;height:280px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.9);font-size:.875rem;backdrop-filter:blur(4px)}
+    .promo-image{width:100%;max-width:380px;height:280px;background:rgba(255,255,255,.1);border-radius:8px;filter:none}
     .promo-image img{width:100%;height:100%;object-fit:cover;border-radius:8px}
     /* Other pages */
     .content-wrap{max-width:1140px;margin:0 auto;padding:2rem 1.5rem}
@@ -227,7 +228,7 @@
             <span class="top-bar-sep">|</span>
             <a href="#section1">Activate Card</a>
             <span class="top-bar-sep">|</span>
-            <span><img class="flag-us" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'%3E%3Cpath d='M0 0h60v30H0z' fill='%23002268'/%3E%3Cpath d='M0 0h60v3H0V0zm0 6h60v3H0V6zm0 6h60v3H0v-3zm0 6h60v3H0v-3zm0 6h60v3H0v-3z' fill='%23fff'/%3E%3Cpath d='M0 3h60v3H0V3zm0 9h60v3H0v-3zm0 9h60v3H0v-3z' fill='%23bf0a30'/%3E%3Cpath d='M0 0h24v30H0z' fill='%23bf0a30'/%3E%3Cpath d='M0 0h24v2.3H0V0zm0 4.6h24v2.3H0V4.6zm0 4.6h24v2.3H0V9.2zm0 4.6h24v2.3H0v-2.3zm0 4.6h24v2.3H0V18.4zm0 4.6h24v2.3H0V23zm0 4.6h24V30H0v-2.4z' fill='%23fff'/%3E%3C/svg%3E" alt="US" role="presentation"> English</span>
+            <span class="top-bar-lang"><img class="flag-us" src="https://flagcdn.com/w40/us.png" alt="US" width="22" height="14"> English</span>
           </div>
         </div>
       </div>
@@ -286,10 +287,8 @@
             <div id="result" class="balance-result"></div>
           </div>
           <div class="promo-panel">
-            <div class="promo-text">Enjoy!</div>
-            <div class="promo-image" id="promoImage">
-              <span>Image placeholder – add your photo here</span>
-            </div>
+            <h2 class="promo-text">Enjoy!</h2>
+            <div class="promo-image" id="promoImage" aria-hidden="true"></div>
           </div>
         </div>
       </section>
