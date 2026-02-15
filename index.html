@@ -87,9 +87,7 @@
     @media(max-width:900px){.main-inner{grid-template-columns:1fr}}
     /* Section 2 – How to activate bar */
     .activate-bar{background:#2d3136;color:#fff;padding:.75rem 1.5rem}
-    .activate-bar-inner{max-width:970px;margin:0 auto;display:flex;align-items:center;gap:.75rem}
-    .activate-bar input[type=checkbox]{width:18px;height:18px}
-    .activate-bar span{font-size:.9375rem}
+    .activate-bar-inner{max-width:970px;margin:0 auto;font-size:.9375rem}
     /* Section 2 – Getting Started */
     .section-getting-started{background:var(--content-bg);padding:3rem 1.5rem}
     .section-getting-started .section-inner{max-width:970px;margin:0 auto}
@@ -247,7 +245,7 @@
     </div>
 
     <div class="main-scroll-wrap">
-      <!-- SECTION 1 – Sign In + Enjoy (like screenshot 3) -->
+      <!-- SECTION 1 – Sign In + promo -->
       <section id="section1" class="main">
         <div class="main-inner">
           <div class="form-panel">
@@ -287,7 +285,7 @@
             <div id="result" class="balance-result"></div>
           </div>
           <div class="promo-panel">
-            <h2 class="promo-text">Enjoy!</h2>
+            <h2 class="promo-text" id="promoEnjoy">Enjoy!</h2>
             <div class="promo-image" id="promoImage" aria-hidden="true"></div>
           </div>
         </div>
@@ -296,8 +294,7 @@
       <!-- SECTION 2 – How to activate + Getting Started (like screenshot 1) -->
       <div class="activate-bar">
         <div class="activate-bar-inner">
-          <input type="checkbox" id="activateCheckbox" aria-label="How to activate">
-          <span>How to activate your yourewardcard</span>
+          How to activate your yourewardcard
         </div>
       </div>
       <section id="section2" class="section-getting-started">
@@ -344,7 +341,7 @@
               </div>
               <h3>Use Online</h3>
               <p>The yourewardcard is a simple, safe and convenient method of making online payments.</p>
-              <a href="#section2">Learn More</a>
+              <a href="/learnmore#use-online">Learn More</a>
             </div>
             <div class="feature-card">
               <div class="feature-icon">
@@ -352,7 +349,7 @@
               </div>
               <h3>ATM Access</h3>
               <p>Flexibility to use your Card at ATMs and get cash back at the point of sale (if your card allows cash access).</p>
-              <a href="#section2">Learn More</a>
+              <a href="/learnmore#atm-access">Learn More</a>
             </div>
             <div class="feature-card">
               <div class="feature-icon">
@@ -360,7 +357,7 @@
               </div>
               <h3>Use Everywhere*</h3>
               <p>Can be used everywhere Debit Mastercard and Visa debit cards are accepted. See Cardholder Agreement for details on where your card can be used.</p>
-              <a href="#section2">Learn More</a>
+              <a href="/learnmore#use-everywhere">Learn More</a>
             </div>
           </div>
           <div class="back-to-top-wrap">

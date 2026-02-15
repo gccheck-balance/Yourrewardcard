@@ -5,7 +5,8 @@
   "framework": null,
   "rewrites": [
     { "source": "/faq", "destination": "/faq/index.html" },
-    { "source": "/contact", "destination": "/contact/index.html" }
+    { "source": "/contact", "destination": "/contact/index.html" },
+    { "source": "/learnmore", "destination": "/learnmore/index.html" }
   ],
   "headers": [
     {
