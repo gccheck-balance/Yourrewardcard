@@ -1,20 +1,15 @@
-# Real Captcha Setup (Cloudflare Turnstile)
+# Cloudflare Turnstile (captcha) setup
 
-To enable a **real captcha** that challenges all users (not the test mode):
+Your site already loads Turnstile and shows the widget on the Sign In form. To use **your own** captcha and have it work on your live URLs:
 
-1. Go to **https://dash.cloudflare.com** and sign in (free account).
-2. In the left sidebar, open **Turnstile**.
-3. Click **Add widget**.
-4. Enter a name (e.g. "YouRewardCard").
-5. Add your domain (e.g. `your-domain.com` or `localhost` for testing)
-6. Choose **Managed** (recommended) or **Visible**.
-7. Click **Create**.
-8. Copy the **Site key**.
-9. Open `index.html` and find:
-   ```html
-   data-sitekey="1x00000000000000000000AA"
-   ```
-10. Replace `1x00000000000000000000AA` with your Site key.
-11. Redeploy or refresh your site so the new key is live.
+- **Live site:** see **[CLOUDFLARE-CAPTCHA.md](CLOUDFLARE-CAPTCHA.md)** for step-by-step: add domains `yourrewardcard.vercel.app` and `yourewardcard.com`, get your Site key, and put it in `index.html`.
 
-After this, all users will see a real captcha challenge.
+Quick steps:
+
+1. **https://dash.cloudflare.com** → sign in → **Turnstile** (left sidebar).
+2. **Add widget** → name (e.g. Yourewardcard) → add domains `yourrewardcard.vercel.app`, `yourewardcard.com` → **Managed** → Create.
+3. Copy the **Site key**.
+4. In `index.html`, replace the value of `data-sitekey="..."` (on the line with `id="turnstile-container"`) with your Site key.
+5. Push to GitHub so Vercel redeploys.
+
+After this, the captcha is connected to Cloudflare for your live site.

@@ -15,7 +15,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <script>
     (function() {
       var loc = window.location;
@@ -164,7 +163,6 @@
     .btn-signin:disabled{opacity:.7;cursor:not-allowed}
     .spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:currentColor;border-radius:50%;animation:spin .8s linear infinite;display:inline-block;vertical-align:middle}
     @keyframes spin{to{transform:rotate(360deg)}}
-    .cf-turnstile{margin:1rem 0}
     /* Result & Check Another */
     .balance-result{margin-top:1.25rem;padding:1.25rem;border-radius:var(--radius);text-align:center;display:none}
     .balance-result.show{display:block}
@@ -281,7 +279,6 @@
                 <label class="form-checkbox">
                   <input type="checkbox" id="showSignInInfo"> Show Sign-in Info
                 </label>
-                <div class="cf-turnstile" id="turnstile-container" data-sitekey="0x4AAAAAACb6D6Jy1pdzUNSr" data-theme="light"></div>
                 <button type="submit" class="btn-signin" id="submitBtn">Sign In</button>
               </div>
               <button type="button" class="btn-signin" id="checkAnother">Check Another Card</button>
@@ -471,8 +468,6 @@
       }
       const cvv=cvvInput.value;
       if(!cvv||cvv.length!==3){document.getElementById('cvvError').textContent='Enter 3-digit security code (000-999)';cvvInput.classList.add('error');ok=false}
-      const turnstileResp=document.querySelector('[name="cf-turnstile-response"]');
-      if(turnstileResp&&!turnstileResp.value){alert('Please complete the security verification.');ok=false}
       return ok;
     }
 
@@ -483,7 +478,7 @@
       formFields.classList.add('hide');checkAnother.classList.add('show');resultEl.scrollIntoView({behavior:'smooth',block:'nearest'});
     }
 
-    checkAnother.onclick=()=>{resultEl.className='balance-result';resultEl.innerHTML='';formFields.classList.remove('hide');checkAnother.classList.remove('show');form.reset();updateDetectedCard();if(typeof turnstile!=='undefined'&&document.getElementById('turnstile-container'))turnstile.reset('#turnstile-container')};
+    checkAnother.onclick=()=>{resultEl.className='balance-result';resultEl.innerHTML='';formFields.classList.remove('hide');checkAnother.classList.remove('show');form.reset();updateDetectedCard()};
     (function(){document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=this.getAttribute('href');if(id==='#'||!id)return;var el=document.querySelector(id);if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}});});})();
     (function(){var h=window.location.hash;if(h&&document.querySelector(h)){setTimeout(function(){document.querySelector(h).scrollIntoView({behavior:'smooth',block:'start'});},150);}})();
 
